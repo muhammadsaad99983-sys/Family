@@ -23,9 +23,10 @@ jobs:
 
       - name: Generate Android project
         run: |
-          cp -r lib /tmp/lib_bak
+          mkdir -p /tmp/lib_bak
+          cp main.dart models.dart store.dart /tmp/lib_bak/
           cp pubspec.yaml /tmp/pubspec_bak.yaml
-          flutter create --platforms=android --org com.familygroup --project-name family_group_app .
+          flutter create --platforms=android --org com.family.group .
           rm -rf lib test
           cp -r /tmp/lib_bak lib
           cp /tmp/pubspec_bak.yaml pubspec.yaml
@@ -39,6 +40,7 @@ jobs:
         with:
           name: family-group-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+
       - uses: actions/upload-artifact@v4
         with:
           name: family-group-aab
